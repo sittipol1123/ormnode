@@ -1,8 +1,11 @@
 const express = require('express');
 const { sequelize, User, Post } = require('./models');
+const getuser = require('./src/route/admin/usersroute');
 
 const app = express();
 app.use(express.json());
+
+app.get('/test', getuser);
 
 app.post('/users', async(req, res) => {
     const {name, email, role} = req.body;
@@ -96,5 +99,5 @@ app.listen({port: 5000}, async () => {
     console.log('Server Start on port 5000');
     await sequelize.authenticate();
     console.log('database connected!!');
-})
+});
     
