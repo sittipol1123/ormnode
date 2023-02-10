@@ -1,11 +1,11 @@
 const express = require('express');
 const { sequelize, User, Post } = require('./models');
-const getuser = require('./src/route/admin/usersroute');
+const {index, fineuser} = require('./src/route/admin/usersroute');
 
 const app = express();
 app.use(express.json());
 
-app.get('/test', getuser);
+// app.get('/test', getuser);
 
 app.post('/users', async(req, res) => {
     const {name, email, role} = req.body;
@@ -19,29 +19,31 @@ app.post('/users', async(req, res) => {
     }
 });
 
-app.get('/users', async (req, res) => {
-    try {
-        const users = await User.findAll();
-        return res.json(users);
-    }catch(err){
-        console.log(err);
-        return res.status(500).json({error: 'somthing went wrong'});
-    }
-});
+// app.get('/users', async (req, res) => {
+//     try {
+//         const users = await User.findAll();
+//         return res.json(users);
+//     }catch(err){
+//         console.log(err);
+//         return res.status(500).json({error: 'somthing went wrong'});
+//     }
+// });
+app.get('/users', index);
+app.get('/users/:uuid', fineuser);
 
-app.get('/users/:uuid', async (req, res) => {
-    const uuid = req.params.uuid;
-    try {
-        const users = await User.findOne({
-            where: {uuid},
-            include: 'posts',
-        });
-        return res.json(users);
-    }catch(err){
-        console.log(err);
-        return res.status(500).json({error: 'somthing went wrong'});
-    }
-});
+// app.get('/users/:uuid', async (req, res) => {
+//     const uuid = req.params.uuid;
+//     try {
+//         const users = await User.findOne({
+//             where: {uuid},
+//             include: 'posts',
+//         });
+//         return res.json(users);
+//     }catch(err){
+//         console.log(err);
+//         return res.status(500).json({error: 'somthing went wrong'});
+//     }
+// });
 
 app.delete('/users/:uuid', async (req, res) => {
     const uuid = req.params.uuid;
