@@ -39,6 +39,14 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: {msg: 'Must be a valid email'}
       }
     },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     role: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -46,6 +54,10 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {msg: 'user must have a role'},
         notEmpty: {msg: 'role must not e empty'}
       }
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,

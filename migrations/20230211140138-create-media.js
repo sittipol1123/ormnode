@@ -2,40 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('media', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      uuid: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-      },
-      name: {
+      filename: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      email: {
+      filesize: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+      },
+      relation_name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      username: {
-        type: DataTypes.STRING,
+      relation_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      role: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      token: {
-        type: DataTypes.STRING,
-        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('media');
   }
 };
