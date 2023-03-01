@@ -10,7 +10,7 @@ const hashPassword = async (password) => {
 
 exports.register = async (req, res) => {
     const { name, email, role, username, password } = req.body;
-    // console.log(req.body);
+    console.log(email);
     try {
         const olduser = await User.findOne({ where: { email: email } });
         if (olduser) {
@@ -43,12 +43,12 @@ exports.login = async(req, res) => {
             const token = jwt.sign(
                 {user_id: user.uuid, username}, 'secret', {expiresIn: "2h",}
             );
-            tm = token;
+            // tm = token;
             user.token = token;
         }else{
             return res.json({message: 'username or password invalid'});
         }
-        return res.json(user);
+        return res.status(200).json({status: 'ok', user});
     } catch (err) {
         console.log(err);
     }
