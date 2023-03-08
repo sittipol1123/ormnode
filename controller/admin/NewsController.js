@@ -21,13 +21,6 @@ exports.create = async(req, res) => {
         models.sort = 0;
         models.publish = true;
         await models.save();
-        // await news.create({
-        //     title,
-        //     short_detail,
-        //     detail,
-        //     short: 0,
-        //     publish: true 
-        // })
         return res.json({status: 'success'});
     }catch(err){
         console.log(err);

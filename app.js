@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { sequelize, User, Post } = require("./models");
 const { index, fineuser } = require("./src/route/admin/usersroute");
+
 // const { verifytoken } = require("./middleware/authmiddleware");
 const router = require("./route/admin");
 const clientrouter = require("./route/client");
@@ -17,6 +18,15 @@ app.use(express.json());
 // app.get('/test', getuser);
 app.use(clientrouter);
 app.use(router);
+
+app.get("/slug", (req, res) => {
+  const slug = require("slugify");
+  const tr = require('transliteration');
+  
+  slug.extend({'☢': 'radioactive'});
+  return res.send(slug("unicode ♥ is ☢"));
+
+});
 // app.post('/users', async(req, res) => {
 //     const {name, email, role} = req.body;
 //     console.log(req.body);

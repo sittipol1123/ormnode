@@ -3,6 +3,8 @@ const router = express.Router();
 const {register, login} = require('../controller/auth/authen');
 const { verifytoken } = require("../middleware/authmiddleware");
 const news = require('../controller/admin/NewsController');
+const users = require('../controller/admin/userController');
+const media = require('../controller/admin/MediaController');
 
 router.post('/login', login);
 
@@ -21,5 +23,12 @@ router.post('/news/create', news.create);
 router.get('/news/:id', news.find);
 router.put('/news/update/:id', news.update);
 router.delete('/news/destroy/:id', news.destroy);
+
+// user route
+router.get('/users', users.index);
+
+// media route
+router.post('/upload', media.create);
+router.get('/upload', media.test);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const { User } = require('../../models');
-const bcrypt = require('bcryptjs');
+const hashPassword = require('../healper/hashpassword');
 
 exports.index = async(req, res) => {
     try {
@@ -72,13 +72,3 @@ exports.deleteuser = async(req, res) => {
         return res.status(500).json({error: 'somthing went wrong'});
     }
 }
-
-const hashPassword = async (password) => {
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    return hashedPassword;
-};
-// module.exports = {
-//     index: index,
-//     fineuser: fineuser
-// };
