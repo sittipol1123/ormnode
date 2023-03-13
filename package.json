@@ -21,6 +21,8 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.28.0",
     "slugify": "^1.6.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
     "transliteration": "^2.3.5"
   }
 }

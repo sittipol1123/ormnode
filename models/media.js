@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
     relation_id: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    table_name: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,

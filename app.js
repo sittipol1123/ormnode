@@ -1,11 +1,26 @@
 const express = require("express");
 const cors = require("cors");
-const { sequelize, User, Post } = require("./models");
-const { index, fineuser } = require("./src/route/admin/usersroute");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
-// const { verifytoken } = require("./middleware/authmiddleware");
+const { sequelize, User, Post } = require("./models");
+// const { index, fineuser } = require("./src/route/admin/usersroute");
+
 const router = require("./route/admin");
 const clientrouter = require("./route/client");
+
+const swaggeroption = {
+  swaggerDefinition: {
+    info: {
+      title: "Sittipol api",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./route/*.js"],
+};
+
+const swaggerDocs = swaggerJsdoc(swaggeroption);
+console.log(swaggerDocs);
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -16,17 +31,53 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 // app.get('/test', getuser);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use(clientrouter);
+/**
+ * @swagger
+ * /news:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
+/**
+ * @swagger
+ * /news/{id}:
+ *   get:
+ *     responses:
+ *       200:
+ *         description: ok.
+ */
+/**
+ * @swagger
+ * /news:
+ *   post:
+ *     responses:
+ *       200:
+ *         description: ok.
+ */
 app.use(router);
 
+/**
+ * @swagger
+ * /slug:
+ *   get:
+ *     description: Welcome to swagger-jsdoc!
+ *     responses:
+ *       200:
+ *         description: Returns a mysterious string.
+ */
 app.get("/slug", (req, res) => {
   const slug = require("slugify");
-  const tr = require('transliteration');
-  
-  slug.extend({'☢': 'radioactive'});
-  return res.send(slug("unicode ♥ is ☢"));
+  const tr = require("transliteration");
 
+  slug.extend({ "☢": "radioactive" });
+  return res.send(slug("unicode ♥ is ☢"));
 });
+
 // app.post('/users', async(req, res) => {
 //     const {name, email, role} = req.body;
 //     console.log(req.body);
@@ -103,6 +154,7 @@ app.put("/users/:uuid", async (req, res) => {
 
 app.listen({ port: 5000 }, async () => {
   console.log("Server Start on port 5000");
+  console.log("http://127.0.0.1:5000");
   // await sequelize.authenticate();
   await sequelize.sync();
   console.log("database connected!!");

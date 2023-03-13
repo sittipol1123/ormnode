@@ -13,19 +13,14 @@ module.exports = {
      * }], {});
     */
      await queryInterface.bulkInsert('users', [{
-        name: 'John Doe',
-        email: 'john@gmail.com',
-        role: 'admin',
         uuid: 'b2ee1a07-dd3c-4e56-8967-879fa6b5de55',
-        createdAt: '2023-02-10T10:11:53.480Z',
-        updatedAt: '2023-02-10T10:11:53.480Z'
-     }, {
-        name: 'jane Doe',
-        email: 'jane@gmail.com',
+        name: 'sittipol',
+        email: 'sittipol@gmail.com',
+        username: 'sittipol',
+        password: '$2a$12$oXky7pbCWmLvzQPjOdoibucntsGX..FFDi0JBzsdY2kP3yzuQuiMO',
         role: 'admin',
-        uuid: 'b2ee1a07-dd3c-4e56-8967-879fa6b5de32',
-        createdAt: '2023-02-10T10:11:53.480Z',
-        updatedAt: '2023-02-10T10:11:53.480Z'
+        createdAt: new Date(),
+        updatedAt: new Date()
      }], {});
   },
 
