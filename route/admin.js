@@ -10,9 +10,6 @@ router.post("/login", login);
 
 // router.use(verifytoken);
 router.post("/users", register);
-router.get("/aaaa", (req, res) => {
-  res.json({ message: "test" });
-});
 router.get("/protectedRoute", (req, res) => {
   res.send("This is a protected route");
 });
