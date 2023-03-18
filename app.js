@@ -6,8 +6,9 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const { sequelize, User, Post } = require("./models");
 // const { index, fineuser } = require("./src/route/admin/usersroute");
 
-const router = require("./route/admin");
+const adminrouter = require("./route/admin");
 const clientrouter = require("./route/client");
+const publicroute = require("./route/public");
 
 const swaggeroption = {
   swaggerDefinition: {
@@ -33,6 +34,7 @@ app.use(express.json());
 // app.get('/test', getuser);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use(publicroute);
 app.use(clientrouter);
 /**
  * @swagger
@@ -59,7 +61,7 @@ app.use(clientrouter);
  *       200:
  *         description: ok.
  */
-app.use(router);
+app.use(adminrouter);
 
 /**
  * @swagger
